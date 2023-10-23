@@ -51,7 +51,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Integer userId) {
-
+        User user = this.userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("user","Id", userId));
+        this.userRepository.delete(user);
     }
 
     private User dtoToUser(UserDto userDto){
@@ -60,6 +61,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setAbout(userDto.getAbout());
+        user.setPassword((userDto.getPassword()));
         return user;
     }
 
