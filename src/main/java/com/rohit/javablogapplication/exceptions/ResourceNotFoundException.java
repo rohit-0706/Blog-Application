@@ -9,6 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String user, String id, Integer userId) {
+
+    String resourceName;
+    String fieldName;
+    long fieldValue;
+
+
+    public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
+        super(String.format("%s not found with %s : %s",resourceName,fieldName,fieldValue));
     }
 }

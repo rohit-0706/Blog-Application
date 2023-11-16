@@ -36,7 +36,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer userId){
         this.userService.deleteUser(userId);
-        return new ResponseEntity(new ApiResponse("User deleted successfully", true),HttpStatus.OK);
+        return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted successfully", true),HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getSingleUser(@PathVariable("userId")Integer userId){
-        return ResponseEntity.ok(this.userService.getUserById(userId)) ;
+    public ResponseEntity<Object> getSingleUser(@PathVariable("userId")Integer userId){
+          return ResponseEntity.ok(this.userService.getUserById(userId)) ;
     }
 }
