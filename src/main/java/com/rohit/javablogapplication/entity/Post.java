@@ -1,11 +1,15 @@
 package com.rohit.javablogapplication.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "post")
+@Getter
+@Setter
 public class Post {
 
     @Id
@@ -19,6 +23,7 @@ public class Post {
     private Date addedDate;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
     @ManyToOne
     private User user;
