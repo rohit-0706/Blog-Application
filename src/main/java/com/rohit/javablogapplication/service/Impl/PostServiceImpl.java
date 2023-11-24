@@ -9,6 +9,7 @@ import com.rohit.javablogapplication.repository.CategoryRepository;
 import com.rohit.javablogapplication.repository.PostRepository;
 import com.rohit.javablogapplication.repository.UserRepository;
 import com.rohit.javablogapplication.service.PostService;
+import com.rohit.javablogapplication.utils.PostResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -69,12 +70,24 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPost(Integer pageNumber, Integer pageSize) {
+    public PostResponse getAllPost(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber,pageSize);
         Page<Post> postPage = postRepository.findAll(pageable);
         List<Post> allPosts = postPage.getContent();
-        return allPosts.stream().map((post) ->modelMapper.
+
+
+        List<PostDto> postDtos =  allPosts.stream().map((post) ->modelMapper.
                 map(post,PostDto.class)).collect(Collectors.toList());
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(postDtos);
+        postResponse.setPageNumber(postPage.getNumber());
+        postResponse.setPageSize(postPage.getSize());
+        postResponse.setTotalElements(postPage.getTotalElements());
+        postResponse.setTotalPages(postPage.getTotalPages());
+        postResponse.setLastPage(postPage.isLast());
+
+        return postResponse;
+
     }
 
     @Override

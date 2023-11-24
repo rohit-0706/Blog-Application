@@ -1,6 +1,8 @@
 package com.rohit.javablogapplication.service;
 import com.rohit.javablogapplication.dto.PostDto;
 import com.rohit.javablogapplication.entity.Post;
+import com.rohit.javablogapplication.utils.PostResponse;
+
 import java.util.List;
 
 public interface PostService {
@@ -10,7 +12,7 @@ public interface PostService {
 
     void deletePost(Integer postId);
 
-    List<PostDto> getAllPost(Integer pageNumber, Integer pageSize);
+    PostResponse getAllPost(Integer pageNumber, Integer pageSize);
 
     PostDto getPostById(Integer postId);
 
