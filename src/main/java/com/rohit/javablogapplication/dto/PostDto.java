@@ -1,11 +1,11 @@
 package com.rohit.javablogapplication.dto;
 
-import com.rohit.javablogapplication.entity.Category;
-import com.rohit.javablogapplication.entity.User;
-import jakarta.persistence.ManyToOne;
+import com.rohit.javablogapplication.entity.Comment;
 import lombok.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,5 +21,6 @@ public class PostDto {
     private Date addedDate;
     private CategoryDto category;
     private UserDto user;
+    private Set<CommentDto> comment = new HashSet<>();
 
 }
